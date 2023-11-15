@@ -1,0 +1,30 @@
+<h1>{{titulo}}</h1>
+<button class="btn btn-success my-2" routerLink="/tienda/crear">Ingresar</button>
+<div class="container text-center">
+    <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+        <div class="col" *ngFor="let tienda of tiendas">
+            <div class="p-3">
+                <!--En el src se colocan entre corchetes para indicar que vamos a poblar, 
+                            inyecto o hace run binding del atributo src de la imagen, que seria la forma de angular-->
+                <a [routerLink]="'/productos/por-tienda/' + tienda.id"><img *ngIf="tienda.fotoHashCode"
+                    [src]="'http://localhost:8080/tienda' + '/uploads/img/' + tienda.id + '?fotoHashCode=' + tienda.fotoHashCode"
+                    class="img-thumbnail rounded"
+                    style="width: 200px; cursor: pointer;" alt></a>
+
+                <img *ngIf="!tienda.fotoHashCode"
+                    [src]="'/assets/img/NoFoto.png'"
+                    class="img-thumbnail rounded"
+                    style="width: 200px; cursor: pointer;" alt><br>
+                {{tienda.nombre}}<br>
+                {{formatearFecha(tienda.createAt)}}<br>
+                <div class="m-3 d-flex justify-content-center">
+                    <button class="btn btn-secondary btn-sm m-1"
+                            [routerLink]="['/tienda/editar/', tienda.id]">Editar</button>
+                    <!--En el boton eliminar tiene que haber un evento click que invoque un metodo que se encargue de eliminar-->
+                    <button class="btn btn-danger btn-sm m-1"
+                            (click)="eliminar(tienda)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div>
+    <h1>{{titulo}}</h1>
+    <button class="btn btn-secondary my-2" routerLink="/tiendas/ver">Volver</button>
+
+    <form action name="formularioCrear">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <!--Se deben mapear las directivas con el ngModel-->
+            <input type="text" name="nombre" class="form-control" id="nombre"
+                [(ngModel)]="tienda.nombre">
+            <div class="alert alert-danger" *ngIf="error?.nombre">{{error.nombre}}</div>
+        </div>
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                <!--Aquien en el inpunt file debe de haber un evento de angular, que seria ((change)="") 
+                    y despue siempre se pasa el evento con el signo pesos $-->
+                <input (change)="seleccionarFoto($event)" type="file"
+                    class="form-control" id="inputGroupFile02">
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <!-- <button type="button" class="btn btn-success"
+                    (click)="producto.id? editar(): crear()">
+                    {{producto.id? 'Editar': 'Crear'}}</button> -->
+
+                <button type="button" class="btn btn-success"
+                    (click)="guardarTienda()">
+                    {{tienda.id? 'Editar': 'Crear'}}</button>
+            </div>
+        </div>
+    </form>
+</div>

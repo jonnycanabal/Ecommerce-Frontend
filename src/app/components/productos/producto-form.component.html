@@ -1,0 +1,52 @@
+<div>
+    <h1>{{titulo}}</h1>
+    <button class="btn btn-secondary my-2" routerLink="/productos/ver">Volver</button>
+
+    <form action name="formularioCrear">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <!--Se deben mapear las directivas con el ngModel-->
+            <input type="text" name="nombre" class="form-control" id="nombre"
+                [(ngModel)]="producto.nombre">
+            <div class="alert alert-danger" *ngIf="error?.nombre">{{error.nombre}}</div>
+        </div>
+        <div class="form-group">
+            <label for="marca">Marca</label>
+            <input type="text" name="marca" class="form-control" id="marca"
+                [(ngModel)]="producto.marca">
+            <div class="alert alert-danger" *ngIf="error && error.marca">{{error.marca}}</div>
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="text" name="precio" class="form-control" id="precio"
+                [(ngModel)]="producto.precio">
+            <div class="alert alert-danger" *ngIf="error && error.precio">{{error.precio}}</div>
+        </div>
+        <div class="form-group">
+            <label for="tienda">Tienda</label>
+            <input type="optional" name="tienda" class="form-control" id="tienda"
+                [(ngModel)]="producto.tienda">
+            <div class="alert alert-danger" *ngIf="error && error.tienda">{{error.tienda}}</div>
+        </div>
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                <!--Aquien en el inpunt file debe de haber un evento de angular, que seria ((change)="") 
+                    y despue siempre se pasa el evento con el signo pesos $-->
+                <input (change)="seleccionarFoto($event)" type="file"
+                    class="form-control" id="inputGroupFile01">
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <!-- <button type="button" class="btn btn-success"
+                    (click)="producto.id? editar(): crear()">
+                    {{producto.id? 'Editar': 'Crear'}}</button> -->
+
+                <button type="button" class="btn btn-success"
+                    (click)="guardarProducto()">
+                    {{producto.id? 'Editar': 'Crear'}}</button>
+            </div>
+        </div>
+    </form>
+</div>
